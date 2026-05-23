@@ -9,7 +9,7 @@ A solução foi implantada em uma máquina virtual Linux na Microsoft Azure. O a
 ```mermaid
 flowchart TD
     A[Usuário] --> B[Navegador Web]
-    B --> C[IP Público da VM Azure :8080]
+    B --> C[IP Público da VM Azure 20.104.20.59:8080]
     C --> D[VM Linux Ubuntu - vm-clyvo-petcare]
     D --> E[Docker Compose]
     E --> F[Container API Spring Boot<br/>clyvo-petcare-api]
