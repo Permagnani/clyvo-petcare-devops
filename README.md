@@ -2,6 +2,10 @@
 
 API REST desenvolvida em Java com Spring Boot para apoiar a continuidade do cuidado veterinário, permitindo o cadastro de pets e a criação de alertas preventivos vinculados a cada animal.
 
+## Benefícios para o Negócio
+
+A solução centraliza informações dos pets e seus alertas preventivos em uma única API, facilitando o acompanhamento dos cuidados veterinários e reduzindo o risco de perda de informações importantes. A associação dos alertas aos pets permite acompanhar consultas preventivas, vacinação e outros cuidados de forma organizada. A utilização de serviços PaaS na Azure facilita a disponibilidade e a evolução da solução sem a necessidade de administrar diretamente a infraestrutura do banco de dados.
+
 ## Opção de Deploy Escolhida
 
 Este projeto utiliza exclusivamente:
