@@ -53,3 +53,19 @@ COMMENT ON COLUMN TB_ALERTA.DS_ALERTA IS 'Descrição do alerta';
 COMMENT ON COLUMN TB_ALERTA.DT_ALERTA IS 'Data programada para o alerta';
 COMMENT ON COLUMN TB_ALERTA.ST_ALERTA IS 'Status do alerta';
 COMMENT ON COLUMN TB_ALERTA.ID_PET IS 'Pet relacionado ao alerta';
+
+-- ============================================================
+-- DADOS INICIAIS PARA DEMONSTRAÇÃO
+-- ============================================================
+
+INSERT INTO TB_PET
+(NM_PET, DS_ESPECIE, DS_RACA, NR_PESO, DT_NASCIMENTO, NM_RESPONSAVEL, DS_OBSERVACOES)
+VALUES
+('Nori', 'Réptil', 'Gecko-leopardo', 0.07, '2022-10-04', 'Matheus Almeida', 'Acompanhamento preventivo de temperatura, umidade e rotina alimentar'),
+('Mel', 'Cachorro', 'Golden Retriever', 28.5, '2020-06-15', 'Ana Souza', 'Acompanhamento de vacinação e consultas preventivas');
+
+INSERT INTO TB_ALERTA
+(TP_ALERTA, DS_ALERTA, DT_ALERTA, ST_ALERTA, ID_PET)
+VALUES
+('DERMATOLOGICO', 'Acompanhamento de ferida na pele', '2026-09-18', 'PENDENTE', 1),
+('VACINACAO', 'Verificar necessidade de reforço vacinal', '2026-10-05', 'PENDENTE', 2);
