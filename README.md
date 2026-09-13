@@ -130,15 +130,7 @@ A senha do PostgreSQL é solicitada durante a execução e não fica armazenada 
 
 ## 3. Criar as tabelas do banco
 
-Conectar ao PostgreSQL:
-
-```bash
-psql "host=clyvo-postgres-larissa-entrega-2026.postgres.database.azure.com port=5432 dbname=clyvo_petcare user=clyvoadmin sslmode=require"
-```
-
-Após informar a senha, executar o arquivo `script_bd.sql`.
-
-Também é possível executar diretamente:
+Executar o script diretamente no PostgreSQL:
 
 ```bash
 psql "host=clyvo-postgres-larissa-entrega-2026.postgres.database.azure.com port=5432 dbname=clyvo_petcare user=clyvoadmin sslmode=require" -f script_bd.sql
