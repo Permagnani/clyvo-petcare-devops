@@ -7,15 +7,15 @@
 
 set -e
 
-RESOURCE_GROUP="rg-clyvo-petcare"
+RESOURCE_GROUP="rg-clyvo-petcare-entrega"
 LOCATION="brazilsouth"
 
-DB_SERVER="clyvo-postgres-larissa-2026"
+DB_SERVER="clyvo-postgres-larissa-entrega-2026"
 DB_NAME="clyvo_petcare"
 DB_USER="clyvoadmin"
 
-APP_NAME="clyvo-petcare-larissa-video"
-PLAN_NAME="plan-clyvo-petcare-video"
+APP_NAME="clyvo-petcare-larissa-entrega"
+PLAN_NAME="plan-clyvo-petcare-entrega"
 
 echo "Digite a senha do administrador PostgreSQL:"
 read -s DB_PASSWORD
