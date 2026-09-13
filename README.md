@@ -221,7 +221,7 @@ SELECT * FROM TB_PET ORDER BY ID_PET;
 ### UPDATE
 
 ```bash
-curl -X PUT https://clyvo-petcare-larissa.azurewebsites.net/pets/3 \
+curl -X PUT https://clyvo-petcare-larissa.azurewebsites.net/pets/<PET_ID> \
   -H "Content-Type: application/json" \
   -d '{
     "nome": "Thor",
@@ -239,19 +239,31 @@ Comprovar no banco:
 ```sql
 SELECT ID_PET, NM_PET, NR_PESO, DS_OBSERVACOES
 FROM TB_PET
-WHERE ID_PET = 3;
+WHERE ID_PET = <PET_ID>;
 ```
 
-### DELETE
+### QUERY
 
 ```bash
-curl -X DELETE https://clyvo-petcare-larissa.azurewebsites.net/pets/3
+curl https://clyvo-petcare-larissa.azurewebsites.net/pets/<PET_ID>
 ```
 
 Comprovar no banco:
 
 ```sql
-SELECT * FROM TB_PET WHERE ID_PET = 3;
+SELECT * FROM TB_PET WHERE ID_PET = <PET_ID>;
+```
+
+### DELETE
+
+```bash
+curl -X DELETE https://clyvo-petcare-larissa.azurewebsites.net/pets/<PET_ID>
+```
+
+Comprovar no banco:
+
+```sql
+SELECT * FROM TB_PET WHERE ID_PET = <PET_ID>;
 ```
 
 Resultado esperado:
@@ -271,7 +283,7 @@ curl -X POST https://clyvo-petcare-larissa.azurewebsites.net/alertas \
     "petId": 1,
     "tipo": "CHECKUP",
     "descricao": "Alerta criado para demonstração de CRUD",
-    "dataAlerta": "2026-09-25",
+    "dataAlerta": "2027-09-25",
     "status": "PENDENTE"
   }'
 ```
@@ -285,13 +297,13 @@ SELECT * FROM TB_ALERTA ORDER BY ID_ALERTA;
 ### UPDATE
 
 ```bash
-curl -X PUT https://clyvo-petcare-larissa.azurewebsites.net/alertas/3 \
+curl -X PUT https://clyvo-petcare-larissa.azurewebsites.net/alertas/<ALERTA_ID> \
   -H "Content-Type: application/json" \
   -d '{
     "petId": 1,
     "tipo": "CHECKUP",
     "descricao": "Alerta atualizado durante a demonstração de CRUD",
-    "dataAlerta": "2026-09-27",
+    "dataAlerta": "2027-09-27",
     "status": "CONCLUIDO"
   }'
 ```
@@ -301,19 +313,31 @@ Comprovar no banco:
 ```sql
 SELECT ID_ALERTA, TP_ALERTA, DS_ALERTA, DT_ALERTA, ST_ALERTA, ID_PET
 FROM TB_ALERTA
-WHERE ID_ALERTA = 3;
+WHERE ID_ALERTA = <ALERTA_ID>;
 ```
 
-### DELETE
+### QUERY
 
 ```bash
-curl -X DELETE https://clyvo-petcare-larissa.azurewebsites.net/alertas/3
+curl https://clyvo-petcare-larissa.azurewebsites.net/alertas/<ALERTA_ID>
 ```
 
 Comprovar no banco:
 
 ```sql
-SELECT * FROM TB_ALERTA WHERE ID_ALERTA = 3;
+SELECT * FROM TB_ALERTA WHERE ID_ALERTA = <ALERTA_ID>;
+```
+
+### DELETE
+
+```bash
+curl -X DELETE https://clyvo-petcare-larissa.azurewebsites.net/alertas/<ALERTA_ID>
+```
+
+Comprovar no banco:
+
+```sql
+SELECT * FROM TB_ALERTA WHERE ID_ALERTA = <ALERTA_ID>;
 ```
 
 Resultado esperado:
