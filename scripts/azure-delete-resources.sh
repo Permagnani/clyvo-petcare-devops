@@ -5,7 +5,7 @@
 # Remove todos os recursos criados para a entrega
 # ============================================================
 
-RESOURCE_GROUP="rg-clyvo-petcare-devops"
+RESOURCE_GROUP="rg-clyvo-petcare"
 
 echo "Removendo Resource Group: $RESOURCE_GROUP"
 echo "Todos os recursos associados serao excluidos."
