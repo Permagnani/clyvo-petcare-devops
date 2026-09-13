@@ -18,6 +18,9 @@ A aplicação e o banco de dados não utilizam containers.
 
 ## Arquitetura da Solução
 
+![Arquitetura da solução Clyvo PetCare](arquitetura-clyvo.png)
+
+
 O usuário acessa a API publicada no Azure App Service.
 
 O App Service executa a aplicação Java Spring Boot e se conecta ao PostgreSQL Flexible Server por meio das seguintes variáveis de ambiente:
