@@ -130,7 +130,7 @@ A senha do PostgreSQL é solicitada durante a execução e não fica armazenada 
 Conectar ao PostgreSQL:
 
 ```bash
-psql "host=clyvo-postgres.postgres.database.azure.com port=5432 dbname=clyvo_petcare user=clyvoadmin sslmode=require"
+psql "host=clyvo-postgres-larissa-2026.postgres.database.azure.com port=5432 dbname=clyvo_petcare user=clyvoadmin sslmode=require"
 ```
 
 Após informar a senha, executar o arquivo `script_bd.sql`.
@@ -138,7 +138,7 @@ Após informar a senha, executar o arquivo `script_bd.sql`.
 Também é possível executar diretamente:
 
 ```bash
-psql "host=clyvo-postgres.postgres.database.azure.com port=5432 dbname=clyvo_petcare user=clyvoadmin sslmode=require" -f script_bd.sql
+psql "host=clyvo-postgres-larissa-2026.postgres.database.azure.com port=5432 dbname=clyvo_petcare user=clyvoadmin sslmode=require" -f script_bd.sql
 ```
 
 ## 4. Gerar o arquivo JAR
@@ -159,7 +159,7 @@ target/clyvopetcare-0.0.1-SNAPSHOT.jar
 ```bash
 az webapp deploy \
   --resource-group rg-clyvo-petcare \
-  --name clyvo-petcare-larissa \
+  --name clyvo-petcare-larissa-video \
   --src-path target/clyvopetcare-0.0.1-SNAPSHOT.jar \
   --type jar
 ```
@@ -169,25 +169,25 @@ az webapp deploy \
 URL pública:
 
 ```text
-https://clyvo-petcare-larissa.azurewebsites.net
+https://clyvo-petcare-larissa-video.azurewebsites.net
 ```
 
 Listar pets:
 
 ```bash
-curl https://clyvo-petcare-larissa.azurewebsites.net/pets
+curl https://clyvo-petcare-larissa-video.azurewebsites.net/pets
 ```
 
 Listar alertas:
 
 ```bash
-curl https://clyvo-petcare-larissa.azurewebsites.net/alertas
+curl https://clyvo-petcare-larissa-video.azurewebsites.net/alertas
 ```
 
 Swagger:
 
 ```text
-https://clyvo-petcare-larissa.azurewebsites.net/swagger-ui.html
+https://clyvo-petcare-larissa-video.azurewebsites.net/swagger-ui.html
 ```
 
 # Demonstração de CRUD
@@ -199,7 +199,7 @@ A demonstração deve ser feita usando a aplicação publicada na Azure e, após
 ### INSERT
 
 ```bash
-curl -X POST https://clyvo-petcare-larissa.azurewebsites.net/pets \
+curl -X POST https://clyvo-petcare-larissa-video.azurewebsites.net/pets \
   -H "Content-Type: application/json" \
   -d '{
     "nome": "Thor",
@@ -218,10 +218,13 @@ Comprovar no banco:
 SELECT * FROM TB_PET ORDER BY ID_PET;
 ```
 
+> **Importante:** anote o `id` retornado pelo POST e substitua `<PET_ID>` por esse valor nos comandos de UPDATE, QUERY e DELETE abaixo.
+
+
 ### UPDATE
 
 ```bash
-curl -X PUT https://clyvo-petcare-larissa.azurewebsites.net/pets/<PET_ID> \
+curl -X PUT https://clyvo-petcare-larissa-video.azurewebsites.net/pets/<PET_ID> \
   -H "Content-Type: application/json" \
   -d '{
     "nome": "Thor",
@@ -245,7 +248,7 @@ WHERE ID_PET = <PET_ID>;
 ### QUERY
 
 ```bash
-curl https://clyvo-petcare-larissa.azurewebsites.net/pets/<PET_ID>
+curl https://clyvo-petcare-larissa-video.azurewebsites.net/pets/<PET_ID>
 ```
 
 Comprovar no banco:
@@ -257,7 +260,7 @@ SELECT * FROM TB_PET WHERE ID_PET = <PET_ID>;
 ### DELETE
 
 ```bash
-curl -X DELETE https://clyvo-petcare-larissa.azurewebsites.net/pets/<PET_ID>
+curl -X DELETE https://clyvo-petcare-larissa-video.azurewebsites.net/pets/<PET_ID>
 ```
 
 Comprovar no banco:
@@ -277,7 +280,7 @@ Resultado esperado:
 ### INSERT
 
 ```bash
-curl -X POST https://clyvo-petcare-larissa.azurewebsites.net/alertas \
+curl -X POST https://clyvo-petcare-larissa-video.azurewebsites.net/alertas \
   -H "Content-Type: application/json" \
   -d '{
     "petId": 1,
@@ -294,10 +297,13 @@ Comprovar no banco:
 SELECT * FROM TB_ALERTA ORDER BY ID_ALERTA;
 ```
 
+> **Importante:** anote o `id` retornado pelo POST e substitua `<ALERTA_ID>` por esse valor nos comandos de UPDATE, QUERY e DELETE abaixo.
+
+
 ### UPDATE
 
 ```bash
-curl -X PUT https://clyvo-petcare-larissa.azurewebsites.net/alertas/<ALERTA_ID> \
+curl -X PUT https://clyvo-petcare-larissa-video.azurewebsites.net/alertas/<ALERTA_ID> \
   -H "Content-Type: application/json" \
   -d '{
     "petId": 1,
@@ -319,7 +325,7 @@ WHERE ID_ALERTA = <ALERTA_ID>;
 ### QUERY
 
 ```bash
-curl https://clyvo-petcare-larissa.azurewebsites.net/alertas/<ALERTA_ID>
+curl https://clyvo-petcare-larissa-video.azurewebsites.net/alertas/<ALERTA_ID>
 ```
 
 Comprovar no banco:
@@ -331,7 +337,7 @@ SELECT * FROM TB_ALERTA WHERE ID_ALERTA = <ALERTA_ID>;
 ### DELETE
 
 ```bash
-curl -X DELETE https://clyvo-petcare-larissa.azurewebsites.net/alertas/<ALERTA_ID>
+curl -X DELETE https://clyvo-petcare-larissa-video.azurewebsites.net/alertas/<ALERTA_ID>
 ```
 
 Comprovar no banco:

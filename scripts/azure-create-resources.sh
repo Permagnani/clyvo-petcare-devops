@@ -10,12 +10,12 @@ set -e
 RESOURCE_GROUP="rg-clyvo-petcare"
 LOCATION="brazilsouth"
 
-DB_SERVER="clyvo-postgres"
+DB_SERVER="clyvo-postgres-larissa-2026"
 DB_NAME="clyvo_petcare"
 DB_USER="clyvoadmin"
 
-APP_NAME="clyvo-petcare-larissa"
-PLAN_NAME="plan-clyvo-petcare"
+APP_NAME="clyvo-petcare-larissa-video"
+PLAN_NAME="plan-clyvo-petcare-video"
 
 echo "Digite a senha do administrador PostgreSQL:"
 read -s DB_PASSWORD
@@ -41,7 +41,8 @@ az postgres flexible-server create \
   --tier Burstable \
   --storage-size 32 \
   --version 16 \
-  --public-access 0.0.0.0
+  --public-access 0.0.0.0 \
+  --output none
 
 echo "Criando banco de dados..."
 az postgres flexible-server db create \
@@ -71,7 +72,8 @@ az webapp config appsettings set \
   --settings \
     SPRING_DATASOURCE_URL="jdbc:postgresql://$DB_SERVER.postgres.database.azure.com:5432/$DB_NAME?sslmode=require" \
     SPRING_DATASOURCE_USERNAME="$DB_USER" \
-    SPRING_DATASOURCE_PASSWORD="$DB_PASSWORD"
+    SPRING_DATASOURCE_PASSWORD="$DB_PASSWORD" \
+    --output none
 
 echo
 echo "Infraestrutura criada com sucesso."
