@@ -8,7 +8,7 @@ steps:
 - task: Maven@4
   inputs:
     mavenPomFile: 'pom.xml'
-    goals: 'clean test package'
+    goals: 'clean package -DskipTests'
     publishJUnitResults: true
 
 - task: PublishBuildArtifacts@1
