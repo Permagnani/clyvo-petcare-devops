@@ -5,6 +5,7 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+
 - task: Maven@4
   inputs:
     mavenPomFile: 'pom.xml'
@@ -15,3 +16,10 @@ steps:
   inputs:
     pathToPublish: 'target'
     artifactName: 'petcare-artifact'
+
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'azure-clyvo-sprint4'
+    appType: 'webAppLinux'
+    appName: 'clyvo-petcare-sprint4'
+    package: 'target/*.jar'
