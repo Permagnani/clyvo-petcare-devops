@@ -1,352 +1,186 @@
-# Clyvo PetCare - DevOps
+🐾 Clyvo PetCare - DevOps
+Descrição da Solução
 
-API REST desenvolvida em Java com Spring Boot para apoiar a continuidade do cuidado veterinário, permitindo o cadastro de pets e a criação de alertas preventivos vinculados a cada animal.
+O Clyvo PetCare é uma API REST desenvolvida em Java com Spring Boot para apoiar a continuidade do cuidado veterinário, permitindo o cadastro de pets e a criação de alertas preventivos vinculados a cada animal.
 
-## Benefícios para o Negócio
+A solução centraliza informações dos pets e seus alertas preventivos em uma única API, facilitando o acompanhamento dos cuidados veterinários e reduzindo o risco de perda de informações importantes. A associação dos alertas aos pets permite acompanhar consultas preventivas, vacinação e outros cuidados de forma organizada.
 
-A solução centraliza informações dos pets e seus alertas preventivos em uma única API, facilitando o acompanhamento dos cuidados veterinários e reduzindo o risco de perda de informações importantes. A associação dos alertas aos pets permite acompanhar consultas preventivas, vacinação e outros cuidados de forma organizada. A utilização de serviços PaaS na Azure facilita a disponibilidade e a evolução da solução sem a necessidade de administrar diretamente a infraestrutura do banco de dados.
+A utilização de serviços PaaS da Microsoft Azure facilita a disponibilidade, escalabilidade e manutenção da solução sem a necessidade de administração direta da infraestrutura.
 
-## Opção de Deploy Escolhida
+Benefícios para o Negócio
+Centralização das informações dos pets.
+Gestão de alertas preventivos e acompanhamento veterinário.
+Redução do risco de perda de informações.
+Facilidade de integração com aplicações futuras.
+Disponibilidade em ambiente de nuvem.
+Infraestrutura gerenciada através de serviços PaaS.
+Tecnologias Utilizadas
+Java 17
+Spring Boot
+Spring Data JPA
+PostgreSQL
+Maven
+Swagger / SpringDoc OpenAPI
+Git
+GitHub
+Azure DevOps
+Azure App Service
+Azure Database for PostgreSQL Flexible Server
+Arquitetura da Solução
+Plain Text
+┌──────────────────┐
+│ Desenvolvedor │
+└─────────┬────────┘
+│
+▼
+┌──────────────────┐
+│ GitHub │
+└─────────┬────────┘
+│
+▼
+┌──────────────────┐
+│ Azure DevOps │
+│ CI/CD │
+└─────────┬────────┘
+│
+▼
+┌──────────────────┐
+│ Azure App Service│
+└─────────┬────────┘
+│
+▼
+┌──────────────────┐
+│ Azure PostgreSQL │
+└─────────┬────────┘
+│
+▼
+┌──────────────────┐
+│ Usuário Final │
+└──────────────────┘
+Pipeline CI/CD
+Fluxo CI
+O desenvolvedor realiza alterações no código.
+O código é enviado para o GitHub.
+O Azure DevOps detecta alterações na branch principal.
+O Maven executa o build da aplicação.
+Os testes automatizados são executados.
+O artefato .jar é gerado.
+O artefato é publicado no Azure DevOps.
+Fluxo CD
+O artefato gerado é utilizado para deploy.
+O Azure App Service recebe a nova versão da aplicação.
+A aplicação é disponibilizada para os usuários finais.
+Infraestrutura Azure
 
-Este projeto utiliza exclusivamente:
+A solução utiliza exclusivamente serviços PaaS da Microsoft Azure.
 
-**Azure App Service + PostgreSQL Flexible Server (PaaS)**
+Aplicação
+Azure App Service Linux
+Java 17
+Banco de Dados
+Azure Database for PostgreSQL Flexible Server
+Variáveis de Ambiente
 
-A aplicação e o banco de dados não utilizam containers.
+A conexão é realizada através das variáveis:
 
-- Aplicação: Azure App Service Linux com Java 17
-- Banco de dados: Azure Database for PostgreSQL Flexible Server
-- Código-fonte: GitHub
-- Provisionamento: Azure CLI
-- Persistência: PostgreSQL em serviço PaaS
+.properties
+SPRING_DATASOURCE_URL
+SPRING_DATASOURCE_USERNAME
+SPRING_DATASOURCE_PASSWORD
 
-## Arquitetura da Solução
+Dados sensíveis não são armazenados no código-fonte nem enviados para o GitHub.
 
-![Arquitetura da solução Clyvo PetCare](arquitetura-clyvo.png)
+Banco de Dados
 
+A aplicação utiliza duas tabelas principais:
 
-O usuário acessa a API publicada no Azure App Service.
-
-O App Service executa a aplicação Java Spring Boot e se conecta ao PostgreSQL Flexible Server por meio das seguintes variáveis de ambiente:
-
-- `SPRING_DATASOURCE_URL`
-- `SPRING_DATASOURCE_USERNAME`
-- `SPRING_DATASOURCE_PASSWORD`
-
-A senha do banco não é armazenada no código-fonte nem enviada ao GitHub.
-
-## Tecnologias Utilizadas
-
-- Java 17
-- Spring Boot
-- Spring Data JPA
-- PostgreSQL
-- Maven
-- Swagger / SpringDoc OpenAPI
-- Microsoft Azure
-- Azure App Service
-- Azure Database for PostgreSQL Flexible Server
-- Azure CLI
-- Git
-- GitHub
-
-## Banco de Dados
-
-A aplicação utiliza duas tabelas principais relacionadas.
-
-### TB_PET
+TB_PET
 
 Armazena os pets cadastrados.
 
-- Chave primária: `ID_PET`
+Chave Primária
 
-### TB_ALERTA
+Plain Text
+ID_PET
+TB_ALERTA
 
 Armazena os alertas associados aos pets.
 
-- Chave primária: `ID_ALERTA`
-- Chave estrangeira: `ID_PET`
+Chave Primária
 
-Relacionamento:
+Plain Text
+ID_ALERTA
 
-`TB_PET 1:N TB_ALERTA`
+Chave Estrangeira
 
-O arquivo `script_bd.sql`, disponível na raiz do projeto, contém o DDL necessário para criação das tabelas, chaves, relacionamento e comentários do banco de dados.
+Plain Text
+ID_PET
+Relacionamento
+Plain Text
+TB_PET 1:N TB_ALERTA
 
-## Rotas da API
+O arquivo script_bd.sql disponível na raiz do projeto contém toda a estrutura do banco de dados.
 
-### Pets
+Rotas da API
+Pets
+Método	Endpoint	DescriçãoGET	/pets	Lista todos os pets
+GET	/pets/{id}	Busca um pet por ID
+POST	/pets	Cria um pet
+PUT	/pets/{id}	Atualiza um pet
+DELETE	/pets/{id}	Remove um pet
+Alertas
+Método	Endpoint	DescriçãoGET	/alertas	Lista todos os alertas
+GET	/alertas/{id}	Busca um alerta por ID
+GET	/alertas/pet/{petId}	Lista os alertas de um pet
+POST	/alertas	Cria um alerta
+PUT	/alertas/{id}	Atualiza um alerta
+DELETE	/alertas/{id}	Remove um alerta
+Azure DevOps
+Configurações do Projeto
+Version Control: Git
+Work Item Process: Agile
+Pipeline: YAML
+Deployment Target: Azure App Service
+Service Connection: azure-clyvo-sprint4
+Repositórios e Acessos
+GitHub
+Plain Text
+https://github.com/Permagnani/clyvo-petcare-devops
+Azure DevOps
+Plain Text
+https://dev.azure.com/RM564995/clyvo-petcare-devops
+Swagger
+Plain Text
+https://clyvo-petcare-sprint4-hcajesetgje4aza3.canadacentral-01.azurewebsites.net/swagger-ui/index.html
+Build Local
 
-| Método | Rota | Descrição |
-|---|---|---|
-| GET | `/pets` | Lista todos os pets |
-| GET | `/pets/{id}` | Busca um pet por ID |
-| POST | `/pets` | Cria um pet |
-| PUT | `/pets/{id}` | Atualiza um pet |
-| DELETE | `/pets/{id}` | Remove um pet |
+Clonar o projeto:
 
-### Alertas
-
-| Método | Rota | Descrição |
-|---|---|---|
-| GET | `/alertas` | Lista todos os alertas |
-| GET | `/alertas/{id}` | Busca um alerta por ID |
-| GET | `/alertas/pet/{petId}` | Lista os alertas de um pet |
-| POST | `/alertas` | Cria um alerta |
-| PUT | `/alertas/{id}` | Atualiza um alerta |
-| DELETE | `/alertas/{id}` | Remove um alerta |
-
-# Implantação na Azure
-
-Todos os comandos abaixo devem ser executados no Azure Cloud Shell em modo Bash.
-
-## 1. Clonar o repositório
-
-```bash
+Shell
 git clone https://github.com/Permagnani/clyvo-petcare-devops.git
 cd clyvo-petcare-devops
-```
 
-## 2. Criar a infraestrutura
+Gerar o artefato:
 
-Dar permissão ao script:
+Shell
+./mvnw clean package
 
-```bash
-chmod +x scripts/azure-create-resources.sh
-```
+ou
 
-Executar:
-
-```bash
-./scripts/azure-create-resources.sh
-```
-
-O script cria:
-
-- Resource Group `rg-clyvo-petcare-entrega`
-- PostgreSQL Flexible Server
-- banco de dados `clyvo_petcare`
-- App Service Plan Linux B1
-- Azure Web App com Java 17
-- variáveis de ambiente para conexão da aplicação com o PostgreSQL
-
-A senha do PostgreSQL é solicitada durante a execução e não fica armazenada no repositório.
-
-## 3. Criar as tabelas do banco
-
-Executar o script diretamente no PostgreSQL:
-
-```bash
-psql "host=clyvo-postgres-larissa-entrega-2026.postgres.database.azure.com port=5432 dbname=clyvo_petcare user=clyvoadmin sslmode=require" -f script_bd.sql
-```
-
-## 4. Gerar o arquivo JAR
-
-```bash
-chmod +x mvnw
+Shell
 ./mvnw clean package -DskipTests
-```
 
-Arquivo gerado:
+Artefato gerado:
 
-```text
+Plain Text
 target/clyvopetcare-0.0.1-SNAPSHOT.jar
-```
+Deploy
 
-## 5. Publicar no Azure App Service
+O deploy da aplicação é realizado através do Azure DevOps utilizando pipeline CI/CD e Azure App Service.
 
-```bash
-az webapp deploy \
-  --resource-group rg-clyvo-petcare-entrega \
-  --name clyvo-petcare-larissa-entrega \
-  --src-path target/clyvopetcare-0.0.1-SNAPSHOT.jar \
-  --type jar
-```
+Documentação da API
 
-## 6. Testar a aplicação publicada
+A documentação da API está disponível através do Swagger:
 
-URL pública:
-
-```text
-https://clyvo-petcare-larissa-entrega.azurewebsites.net
-```
-
-Listar pets:
-
-```bash
-curl https://clyvo-petcare-larissa-entrega.azurewebsites.net/pets
-```
-
-Listar alertas:
-
-```bash
-curl https://clyvo-petcare-larissa-entrega.azurewebsites.net/alertas
-```
-
-Swagger:
-
-```text
-https://clyvo-petcare-larissa-entrega.azurewebsites.net/swagger-ui.html
-```
-
-# Demonstração de CRUD
-
-A demonstração deve ser feita usando a aplicação publicada na Azure e, após cada operação, deve ser realizada uma consulta diretamente no PostgreSQL para comprovar a persistência.
-
-## CRUD - PET
-
-### INSERT
-
-```bash
-curl -X POST https://clyvo-petcare-larissa-entrega.azurewebsites.net/pets \
-  -H "Content-Type: application/json" \
-  -d '{
-    "nome": "Thor",
-    "especie": "Cachorro",
-    "raca": "Pastor Alemão",
-    "peso": 32.0,
-    "dataNascimento": "2021-03-12",
-    "nomeResponsavel": "Carlos Lima",
-    "observacoes": "Pet criado para demonstração de CRUD"
-  }'
-```
-
-Comprovar no banco:
-
-```sql
-SELECT * FROM TB_PET ORDER BY ID_PET;
-```
-
-> **Importante:** anote o `id` retornado pelo POST e substitua `<PET_ID>` por esse valor nos comandos de UPDATE, QUERY e DELETE abaixo.
-
-
-### UPDATE
-
-```bash
-curl -X PUT https://clyvo-petcare-larissa-entrega.azurewebsites.net/pets/<PET_ID> \
-  -H "Content-Type: application/json" \
-  -d '{
-    "nome": "Thor",
-    "especie": "Cachorro",
-    "raca": "Pastor Alemão",
-    "peso": 34.5,
-    "dataNascimento": "2021-03-12",
-    "nomeResponsavel": "Carlos Lima",
-    "observacoes": "Pet atualizado durante a demonstração de CRUD"
-  }'
-```
-
-Comprovar no banco:
-
-```sql
-SELECT ID_PET, NM_PET, NR_PESO, DS_OBSERVACOES
-FROM TB_PET
-WHERE ID_PET = <PET_ID>;
-```
-
-### QUERY
-
-```bash
-curl https://clyvo-petcare-larissa-entrega.azurewebsites.net/pets/<PET_ID>
-```
-
-Comprovar no banco:
-
-```sql
-SELECT * FROM TB_PET WHERE ID_PET = <PET_ID>;
-```
-
-### DELETE
-
-```bash
-curl -X DELETE https://clyvo-petcare-larissa-entrega.azurewebsites.net/pets/<PET_ID>
-```
-
-Comprovar no banco:
-
-```sql
-SELECT * FROM TB_PET WHERE ID_PET = <PET_ID>;
-```
-
-Resultado esperado:
-
-```text
-(0 rows)
-```
-
-## CRUD - ALERTA
-
-### INSERT
-
-```bash
-curl -X POST https://clyvo-petcare-larissa-entrega.azurewebsites.net/alertas \
-  -H "Content-Type: application/json" \
-  -d '{
-    "petId": 1,
-    "tipo": "CHECKUP",
-    "descricao": "Alerta criado para demonstração de CRUD",
-    "dataAlerta": "2027-09-25",
-    "status": "PENDENTE"
-  }'
-```
-
-Comprovar no banco:
-
-```sql
-SELECT * FROM TB_ALERTA ORDER BY ID_ALERTA;
-```
-
-> **Importante:** anote o `id` retornado pelo POST e substitua `<ALERTA_ID>` por esse valor nos comandos de UPDATE, QUERY e DELETE abaixo.
-
-
-### UPDATE
-
-```bash
-curl -X PUT https://clyvo-petcare-larissa-entrega.azurewebsites.net/alertas/<ALERTA_ID> \
-  -H "Content-Type: application/json" \
-  -d '{
-    "petId": 1,
-    "tipo": "CHECKUP",
-    "descricao": "Alerta atualizado durante a demonstração de CRUD",
-    "dataAlerta": "2027-09-27",
-    "status": "CONCLUIDO"
-  }'
-```
-
-Comprovar no banco:
-
-```sql
-SELECT ID_ALERTA, TP_ALERTA, DS_ALERTA, DT_ALERTA, ST_ALERTA, ID_PET
-FROM TB_ALERTA
-WHERE ID_ALERTA = <ALERTA_ID>;
-```
-
-### QUERY
-
-```bash
-curl https://clyvo-petcare-larissa-entrega.azurewebsites.net/alertas/<ALERTA_ID>
-```
-
-Comprovar no banco:
-
-```sql
-SELECT * FROM TB_ALERTA WHERE ID_ALERTA = <ALERTA_ID>;
-```
-
-### DELETE
-
-```bash
-curl -X DELETE https://clyvo-petcare-larissa-entrega.azurewebsites.net/alertas/<ALERTA_ID>
-```
-
-Comprovar no banco:
-
-```sql
-SELECT * FROM TB_ALERTA WHERE ID_ALERTA = <ALERTA_ID>;
-```
-
-Resultado esperado:
-
-```text
-(0 rows)
-```
+Plain Text
+https://clyvo-petcare-sprint4-hcajesetgje4aza3.canadacentral-01.azurewebsites.net/swagger-ui/index.html
