@@ -37,39 +37,10 @@ A utilização de serviços PaaS da Microsoft Azure facilita a disponibilidade, 
 
 ---
 
-## Arquitetura da Solução
+## Arquitetura da Solução/Diagrama
 
-```text
-(1) Desenvolvedor
-        │
-        ▼
-(2) GitHub
-        │
-        ▼
-(3) Azure DevOps
-        │
-        ▼
-(4) Pipeline CI
-    • Build
-    • Testes
-    • Publicação do Artefato
-        │
-        ▼
-(5) Pipeline CD
-    • Deploy Automático
-        │
-        ▼
-(6) Azure App Service
-        │
-        ▼
-(7) Azure Database for PostgreSQL
-        ▲
-        │
-(8) Usuário Final
-        │
-        ▼
-     API REST / Swagger
-```
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/d1ad1b5f-07a8-45c5-a05b-d262b758d26a" />
+
 
 ### Fluxo da Arquitetura
 
