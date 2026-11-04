@@ -23,5 +23,5 @@ steps:
   inputs:
     azureSubscription: 'azure-clyvo-sprint4'
     appType: 'webAppLinux'
-    appName: 'clyvo-petcare-sprint4'
+    appName: 'clyvo-petcare-sprint4-lari2026'
     package: 'target/*.jar'
