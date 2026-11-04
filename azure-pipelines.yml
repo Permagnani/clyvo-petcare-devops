@@ -1,3 +1,4 @@
+
 trigger:
 - main
 
@@ -9,8 +10,9 @@ steps:
 - task: Maven@4
   inputs:
     mavenPomFile: 'pom.xml'
-    goals: 'clean package -DskipTests'
+    goals: 'clean package'
     publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
 
 - task: PublishBuildArtifacts@1
   inputs:
