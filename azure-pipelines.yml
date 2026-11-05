@@ -21,7 +21,7 @@ steps:
 
 - task: AzureWebApp@1
   inputs:
-    azureSubscription: 'azure-clyvo-sprint4'
+    azureSubscription: 'azure-clyvo-sprint4-nova'
     appType: 'webAppLinux'
     appName: 'clyvo-petcare-sprint4-lari2026'
     package: 'target/*.jar'
